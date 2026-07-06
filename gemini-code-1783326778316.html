@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms Lê Hằng English - IELTS Reading Advanced Mock Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAEA);
+            background-size: 400% 400%;
+            animation: gradientBG 14s ease infinite;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Họa tiết SVG sinh thái học lơ lửng độc lập */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 10c-5.5 0-10 4.5-10 10 0 4.3 2.7 8 6.5 9.4L25 45h10l-1.5-15.6c3.8-1.4 6.5-5.1 6.5-9.4 0-5.5-4.5-10-10-10zm-15 30c2 0 3.5-1.5 3.5-3.5S17 33 15 33s-3.5 1.5-3.5 3.5 1.5 3.5 3.5 3.5z' fill='%2300C9A7' fill-opacity='0.4'/%3E%3C/svg%3E");
+        }
+
+        /* Top Control Bar */
+        .top-bar {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            z-index: 10;
+            border-bottom: 3px solid #6C5CE7;
+        }
+
+        .teacher-info .sub-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .teacher-info .main-title {
+            font-size: 11.5pt;
+            font-weight: 900;
+            color: #6C5CE7;
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #FFF3CD;
+            border: 2px solid #FFEBAA;
+            padding: 6px 16px;
+            border-radius: 14px;
+            box-shadow: 0 4px 0 #FFEBAA;
+        }
+
+        .timer-display {
+            font-size: 13pt;
+            font-weight: 900;
+            color: #B7791F;
+            min-width: 65px;
+            text-align: center;
+        }
+
+        .timer-btn {
+            background: #6C5CE7;
+            color: white;
+            border: none;
+            padding: 5px 14px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 9pt;
+            cursor: pointer;
+            box-shadow: 0 2px 0 #4B3FA3;
+        }
+
+        /* Tabs System Layout */
+        .tab-nav-bar {
+            display: flex;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 8px 24px 0 24px;
+            gap: 8px;
+            z-index: 9;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .tab-link {
+            background: #E2E8F0;
+            border: none;
+            padding: 10px 20px;
+            font-size: 9.5pt;
+            font-weight: 900;
+            color: #4A5568;
+            border-radius: 12px 12px 0 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-link.active {
+            background: #FFFFFF;
+            color: #6C5CE7;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.04);
+            padding-bottom: 12px;
+            border: 2px solid #6C5CE7;
+            border-bottom: none;
+        }
+
+        .global-progress-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            width: 260px;
+            padding-bottom: 6px;
+        }
+
+        .progress-bar-bg {
+            background: #EDF2F7;
+            width: 100%;
+            height: 14px;
+            border-radius: 7px;
+            border: 1.5px solid #CBD5E1;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #00D26A;
+            width: 0%;
+            height: 100%;
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            font-size: 9.5pt;
+            font-weight: 900;
+            color: #2D3748;
+            min-width: 45px;
+        }
+
+        /* Split-Screen Workspace */
+        .workspace {
+            display: none;
+            flex: 1;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .workspace.active {
+            display: grid;
+        }
+
+        .panel-left, .panel-right {
+            overflow-y: auto;
+            padding: 25px;
+            height: 100%;
+        }
+
+        .panel-left {
+            background: rgba(255, 255, 255, 0.88);
+            border-right: 3px dashed #6C5CE7;
+        }
+
+        .panel-right {
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        /* Chế độ bôi đen highlight hồng pastel nhạt */
+        .panel-left ::selection {
+            background: #FFB7B2 !important;
+            color: #000000 !important;
+        }
+
+        .passage-title {
+            font-size: 15pt;
+            font-weight: 900;
+            color: #2C3E50;
+            margin-bottom: 22px;
+            border-left: 6px solid #6C5CE7;
+            padding-left: 12px;
+            line-height: 1.4;
+        }
+
+        .paragraph-block {
+            margin-bottom: 25px;
+            padding: 10px;
+            border-radius: 14px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .paragraph-block.located-flash {
+            background-color: #FFF9C4 !important;
+            border: 2px dashed #FBC02D !important;
+            transform: scale(1.01);
+        }
+
+        .paragraph-text {
+            font-size: 11pt;
+            color: #2D3748;
+            line-height: 1.75;
+            text-align: justify;
+            margin: 0 0 12px 0;
+        }
+
+        .translate-btn {
+            background: #E2F0CB;
+            border: 2px solid #C3E6CB;
+            color: #2D3748;
+            padding: 6px 14px;
+            font-size: 8.5pt;
+            font-weight: 900;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 0 #C3E6CB;
+        }
+
+        .translation-box {
+            display: none;
+            margin-top: 10px;
+            padding: 14px;
+            background: #F8FAFC;
+            border-left: 4px solid #00CEC9;
+            border-radius: 8px;
+            font-size: 10pt;
+            color: #4A5568;
+            line-height: 1.65;
+            text-align: justify;
+        }
+
+        /* Glossary wrapper */
+        .glossary-wrapper {
+            margin-top: 40px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 22px;
+            border: 3px solid #6C5CE7;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.03);
+        }
+
+        .glossary-title {
+            font-size: 11.5pt;
+            font-weight: 900;
+            color: #6C5CE7;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .glossary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .glossary-table th {
+            background: #6C5CE7;
+            color: white;
+            font-weight: 900;
+            padding: 10px;
+            font-size: 9.5pt;
+        }
+
+        .glossary-table td {
+            padding: 10px;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 9.5pt;
+            color: #2D3748;
+        }
+
+        /* Exercise Design Card */
+        .exercise-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.03);
+            border: 3px solid #E4E7EB;
+        }
+
+        .question-header {
+            font-size: 11pt;
+            font-weight: 900;
+            color: #2C3E50;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            background: #FFFFFF;
+            border: 3px solid #E4E7EB;
+            border-radius: 14px;
+            padding: 13px 18px;
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #4A5568;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 0 #E4E7EB;
+            transition: all 0.1s ease;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            background: #F8FAFC;
+        }
+
+        .correct-ui {
+            background-color: #00D26A !important;
+            border-color: #00A855 !important;
+            color: white !important;
+            box-shadow: 0 4px 0 #00A855 !important;
+        }
+
+        .wrong-ui {
+            background-color: #FF4757 !important;
+            border-color: #D63031 !important;
+            color: white !important;
+            box-shadow: 0 4px 0 #D63031 !important;
+        }
+
+        .shake-effect { animation: shakeUI 0.3s ease-in-out; }
+        @keyframes shakeUI {
+            0%, 100% { transform: translateX(0); }
+            25%, 75% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+        }
+
+        .explain-box {
+            display: none;
+            margin-top: 15px;
+            background: #F8FAFC;
+            border-left: 5px solid #6C5CE7;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .explain-row {
+            font-size: 9.5pt;
+            color: #4A5568;
+            margin-bottom: 6px;
+            line-height: 1.55;
+        }
+
+        .locate-sync-btn {
+            background: #EDF2F7;
+            border: 1.5px solid #CBD5E1;
+            padding: 5px 12px;
+            font-size: 8.5pt;
+            font-weight: 900;
+            color: #4A5568;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bottom-panel {
+            background: white;
+            padding: 14px;
+            text-align: center;
+            border-top: 2px solid #E2E8F0;
+            z-index: 5;
+        }
+
+        .submit-all-btn {
+            background: #FDCB6E;
+            color: #2C3E50;
+            border: 3px solid #E6A115;
+            padding: 12px 55px;
+            font-size: 13pt;
+            font-weight: 900;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #E6A115;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 4px solid #6C5CE7;
+        }
+
+        .modal-score-lbl {
+            font-size: 35pt;
+            font-weight: 900;
+            color: #6C5CE7;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti-canvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:99999;"></canvas>
+
+    <div class="top-bar">
+        <div class="teacher-info">
+            <span class="sub-title">IELTS READING MOCK TEST</span>
+            <span class="main-title">Giáo viên tạo: Ms Lê Hằng English</span>
+        </div>
+        <div class="timer-container">
+            ⏱️ <span class="timer-display" id="time-lbl">25:00</span>
+            <button class="timer-btn" id="time-toggle-btn" onclick="toggleTimer()">BẮT ĐẦU TÍNH GIỜ LÀM BÀI</button>
+        </div>
+    </div>
+
+    <div class="tab-nav-bar">
+        <button class="tab-link active" onclick="switchTab(1)">Cloze Text 1</button>
+        <button class="tab-link" onclick="switchTab(2)">Cloze Text 2</button>
+        <button class="tab-link" onclick="switchTab(3)">Reading 1</button>
+        <button class="tab-link" onclick="switchTab(4)">Reading 2</button>
+        <button class="tab-link" onclick="switchTab(5)">Reading 3</button>
+
+        <div class="global-progress-box">
+            <span class="progress-text">Tiến độ bài:</span>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill-node"></div>
+            </div>
+            <span class="progress-text" id="progress-txt-node">0%</span>
+        </div>
+    </div>
+
+    <div class="workspace active" id="tab-pane-1">
+        <div class="panel-left" id="p1-left-scroll">
+            <div class="passage-title">The Anthropocene and Sixth Mass Extinction Crisis</div>
+
+            <div class="paragraph-block" id="p1-para-1">
+                <p class="paragraph-text">The current geological epoch, widely termed the Anthropocene, is defined by the profound and often irreversible impact of human activity on the Earth’s delicate systems. Perhaps the most alarming manifestation of this influence is the precipitous decline in global biodiversity, a crisis that many scientists describe as the sixth mass extinction. We are currently witnessing a “biological annihilation” that transcends the natural background rate of extinction, affecting every species from the microscopic soil organisms that cycle nutrients to the apex predators of the marine world.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p1-tr-1')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p1-tr-1">Kỷ nguyên địa chất hiện tại, được gọi rộng rãi là Kỷ Nhân sinh (Anthropocene), được định nghĩa bởi tác động sâu sắc và thường không thể đảo ngược của hoạt động con người đối với các hệ thống mỏng manh của Trái Đất. Có lẽ biểu hiện đáng báo động nhất của sự ảnh hưởng này là sự suy giảm nhanh chóng của đa dạng sinh học toàn cầu, một cuộc khủng hoảng mà nhiều nhà khoa học mô tả là cuộc tuyệt chủng hàng loạt thứ sáu. Chúng ta hiện đang chứng kiến một "sự hủy diệt sinh học" vượt xa tỷ lệ tuyệt chủng tự nhiên trong lịch sử, ảnh hưởng đến mọi loài từ sinh vật đất cực nhỏ tuần hoàn chất dinh dưỡng đến các động vật ăn thịt đầu bảng của thế giới đại dương.</div>
+            </div>
+
+            <div class="paragraph-block" id="p1-para-2">
+                <p class="paragraph-text">The primary catalyst for this devastation is the relentless expansion of human infrastructure and industrial agriculture, which necessitates the large-scale _______________ (1) of pristine forests. When these lush carbon sinks are eradicated, the intricate ecosystem services they provide—such as carbon sequestration and water cycle regulation—are lost. What remains is often a barren and fragmented landscape, stripped of its ability to support diverse life forms.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p1-tr-2')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p1-tr-2">Chất xúc tác chính cho sự tàn phá này là sự mở rộng không ngừng của cơ sở hạ tầng con người và nông nghiệp công nghiệp, đòi hỏi phải phá hủy/phát quang quy mô lớn các khu rừng nguyên sinh. Khi các bể hấp thụ carbon tươi tốt này bị xóa sổ, các dịch vụ hệ sinh thái phức tạp mà chúng cung cấp—chẳng hạn như lưu trữ carbon và điều hòa chu trình nước—sẽ bị mất đi. Những gì còn lại thường là một cảnh quan cằn cỗi và bị chia cắt, bị tước bỏ khả năng hỗ trợ các dạng sống đa dạng.</div>
+            </div>
+
+            <div class="paragraph-block" id="p1-para-3">
+                <p class="paragraph-text">Furthermore, the fragmentation of habitats leaves wildlife populations isolated and increasingly vulnerable to anthropogenic pressures. In these remnants, animals are frequently subjected to illegal poaching, a practice that persists despite the establishment of supposedly secure wildlife sanctuaries. This loss of fauna triggers a cascading effect; for instance, the absence of seed-dispersing animals can prevent forest regeneration, leading to further soil depletion. Consequently, the land becomes susceptible to being _______________ (2) by extreme weather events, a phenomenon exacerbated by climate change.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p1-tr-3')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p1-tr-3">Hơn nữa, sự chia cắt môi trường sống khiến các quần thể động vật hoang dã bị cô lập và ngày càng dễ bị tổn thương trước các áp lực do con người gây ra. Trong những vùng tàn tích này, động vật thường xuyên phải chịu nạn săn bắn trộm bất hợp pháp, một hành vi vẫn tiếp diễn bất chấp việc thành lập các khu bảo tồn động vật hoang dã được cho là an toàn. Sự mất mát của hệ động vật này gây ra một hiệu ứng thác đổ; ví dụ, sự vắng mặt của các động vật phát tán hạt giống có thể ngăn cản sự tái sinh của rừng, dẫn đến suy kiệt đất thêm trầm trọng. Hệ quả là, đất đai trở nên dễ bị xói mòn bởi các hiện tượng thời tiết cực đoan, một hiện tượng trở nên trầm trọng hơn do biến đổi khí hậu.</div>
+            </div>
+
+            <div class="paragraph-block" id="p1-para-4">
+                <p class="paragraph-text">Without a radical shift toward ecological _______________ (3) and the stringent preservation of our remaining natural resources, we risk a permanent collapse of the biosphere. Addressing this requires more than just local action; it demands a global commitment to sustainability that redefines our relationship with the atmosphere and the terrestrial environment. Efforts to _______________ (4) polluted water sources and restore degraded lands are vital, but they must be coupled with a fundamental reduction in our collective carbon footprint. Only by valuing our biological heritage can we hope to _______________ (5) the planet’s remaining wonders for future generations.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p1-tr-4')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p1-tr-4">Nếu không có một sự chuyển dịch căn bản hướng tới sự bền vững sinh thái và sự gìn giữ nghiêm ngặt các nguồn tài nguyên thiên nhiên còn lại, chúng ta phải đối mặt với nguy cơ sụp đổ vĩnh viễn của sinh quyển. Giải quyết vấn đề này đòi hỏi nhiều hơn là chỉ hành động cục bộ; nó đòi hỏi một cam kết toàn cầu về tính bền vững nhằm tái định nghĩa mối quan hệ của chúng ta với bầu khí quyển và môi trường trên cạn. Các nỗ lực nhằm xử lý/khắc phục môi trường nguồn nước bị ô nhiễm và phục hồi đất đai bị suy thoái là sống còn, nhưng chúng phải được kết hợp với việc giảm thiểu căn bản dấu chân carbon tập thể của chúng ta. Chỉ bằng cách trân trọng di sản sinh học của mình, chúng ta mới có thể hy vọng bảo tồn những kỳ quan còn lại của hành tinh cho các thế hệ tương lai.</div>
+            </div>
+
+            <div class="glossary-wrapper">
+                <div class="glossary-title">📊 GLOSSARY (BẢNG TRÍCH XUẤT TỪ VỰNG HỌC THUẬT - CLOZE 1)</div>
+                <table class="glossary-table">
+                    <thead>
+                        <tr>
+                            <th>Từ vựng</th>
+                            <th>Từ loại</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Cặp từ đồng nghĩa trong câu hỏi & bài đọc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Clearance</td><td>n</td><td>Sự phát quang, san phẳng phá hủy</td><td>Large-scale removal of forests</td></tr>
+                        <tr><td>Eroded</td><td>v</td><td>Bị xói mòn, rửa trôi bào mòn</td><td>Worn away by extreme weather</td></tr>
+                        <tr><td>Sustainability</td><td>n</td><td>Sự bền vững phát triển lâu dài</td><td>Stringent preservation of resources</td></tr>
+                        <tr><td>Remediate</td><td>v</td><td>Xử lý, khắc phục ô nhiễm</td><td>Purify / clean up pollutants</td></tr>
+                        <tr><td>Preserve</td><td>v</td><td>Bảo tồn gìn giữ nguyên vẹn</td><td>Save / protect remaining wonders</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 1:</strong> Choose the best option for blank (1):</div>
+                <button class="option-btn" onclick="checkMCQ(1, 'A', 'C')">A. reforestation</button>
+                <button class="option-btn" onclick="checkMCQ(1, 'B', 'C')">B. deforestation</button>
+                <button class="option-btn" onclick="checkMCQ(1, 'C', 'C')">C. clearance</button>
+                <button class="option-btn" onclick="checkMCQ(1, 'D', 'C')">D. logging</button>
+                <div class="explain-box" id="ex-box-1"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 2:</strong> Choose the best option for blank (2):</div>
+                <button class="option-btn" onclick="checkMCQ(2, 'A', 'A')">A. eroded</button>
+                <button class="option-btn" onclick="checkMCQ(2, 'B', 'A')">B. recycled</button>
+                <button class="option-btn" onclick="checkMCQ(2, 'C', 'A')">C. contaminated</button>
+                <button class="option-btn" onclick="checkMCQ(2, 'D', 'A')">D. purified</button>
+                <div class="explain-box" id="ex-box-2"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 3:</strong> Choose the best option for blank (3):</div>
+                <button class="option-btn" onclick="checkMCQ(3, 'A', 'B')">A. exploitation</button>
+                <button class="option-btn" onclick="checkMCQ(3, 'B', 'B')">B. sustainability</button>
+                <button class="option-btn" onclick="checkMCQ(3, 'C', 'B')">C. contamination</button>
+                <button class="option-btn" onclick="checkMCQ(3, 'D', 'B')">D. degradation</button>
+                <div class="explain-box" id="ex-box-3"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 4:</strong> Choose the best option for blank (4):</div>
+                <button class="option-btn" onclick="checkMCQ(4, 'A', 'C')">A. exploit</button>
+                <button class="option-btn" onclick="checkMCQ(4, 'B', 'C')">B. contaminate</button>
+                <button class="option-btn" onclick="checkMCQ(4, 'C', 'C')">C. remediate</button>
+                <button class="option-btn" onclick="checkMCQ(4, 'D', 'C')">D. deplete</button>
+                <div class="explain-box" id="ex-box-4"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 5:</strong> Choose the best option for blank (5):</div>
+                <button class="option-btn" onclick="checkMCQ(5, 'A', 'D')">A. erode</button>
+                <button class="option-btn" onclick="checkMCQ(5, 'B', 'D')">B. pollute</button>
+                <button class="option-btn" onclick="checkMCQ(5, 'C', 'D')">C. exhaust</button>
+                <button class="option-btn" onclick="checkMCQ(5, 'D', 'D')">D. preserve</button>
+                <div class="explain-box" id="ex-box-5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace" id="tab-pane-2">
+        <div class="panel-left" id="p2-left-scroll">
+            <div class="passage-title">The Circular Economy and Decarbonization Imperatives</div>
+
+            <div class="paragraph-block" id="p2-para-1">
+                <p class="paragraph-text">As the global community grapples with the existential threat of global warming, the transition from a carbon-intensive economy to a circular, carbon-neutral one has become an urgent global imperative. For over a century, the industrial world has been fueled by the combustion of _______________ (1), a process that has released staggering volumes of anthropogenic emissions into the atmosphere. This has dramatically intensified the greenhouse effect, leading to an unprecedented rise in global temperatures and the disruption of stable climatic patterns. The resulting surge in natural disasters, ranging from catastrophic floods to prolonged and devastating wildfires, underscores the extreme fragility of our current socioeconomic model. To mitigate these risks, we must urgently prioritize the widespread adoption of renewable energy technologies. The proliferation of solar panels and wind turbines represents a significant leap toward decarbonization, allowing for a substantial reduction in our collective carbon footprint.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p2-tr-1')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p2-tr-1">Khi cộng đồng toàn cầu vật lộn với mối đe dọa hiện sinh mang tên nóng lên toàn cầu, quá trình chuyển đổi từ một nền kinh tế thâm dụng carbon sang nền kinh tế tuần hoàn, trung hòa carbon đã trở thành một yêu cầu cấp bách toàn cầu. Trong hơn một thế kỷ, thế giới công nghiệp đã được thúc đẩy bằng việc đốt nhiên liệu hóa thạch, một quá trình giải phóng khối lượng khổng lồ khí thải do con người tạo ra vào bầu khí quyển. Điều này đã làm tăng cường mạnh mẽ hiệu ứng nhà kính, dẫn đến sự gia tăng chưa từng thấy của nhiệt độ toàn cầu và sự phá vỡ các mô hình khí hậu ổn định. Sự gia tăng đột biến của các thảm họa thiên nhiên sau đó, từ lũ lụt thảm khốc đến cháy rừng kéo dài và tàn khốc, làm nổi bật sự mong manh tột cùng của mô hình kinh tế xã hội hiện tại. Để giảm thiểu những rủi ro này, chúng ta phải khẩn cấp ưu tiên áp dụng rộng rãi các công nghệ năng lượng tái tạo. Sự bùng nổ của các tấm pin năng lượng mặt trời và tuabin gió đại diện cho một bước nhảy vọt đáng kể hướng tới khử carbon, cho phép giảm đáng kể dấu chân carbon tập thể của chúng ta.</div>
+            </div>
+
+            <div class="paragraph-block" id="p2-para-2">
+                <p class="paragraph-text">However, the transition is not without its own set of ecological dilemmas. The extraction of rare-earth metals for clean-tech components can inadvertently lead to severe environmental contamination, often affecting the very habitats we aim to protect. To ensure that the “green revolution” is truly eco-friendly, we must implement rigorous standards for waste _______________ (2). For example, it is vital that decommissioned turbine blades and electronics are _______________ (3) rather than consigned to landfills, where they might leak toxic substances into the groundwater.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p2-tr-2')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p2-tr-2">Tuy nhiên, quá trình chuyển đổi không phải là không có những tình huống tiến thoái lưỡng nan về sinh thái. Việc khai thác các kim loại đất hiếm cho các linh kiện công nghệ sạch có thể vô tình dẫn đến ô nhiễm môi trường nghiêm trọng, thường ảnh hưởng đến chính môi trường sống mà chúng ta nhằm mục đích bảo vệ. Để đảm bảo cuộc 'cách mạng xanh' thực sự thân thiện với môi trường, chúng ta phải thực hiện các tiêu chuẩn nghiêm ngặt về xử lý/vứt bỏ rác thải (disposal). Ví dụ, điều quan trọng là các cánh tuabin và đồ điện tử ngừng hoạt động phải được tái chế thay vì chuyển đến các bãi chôn lấp, nơi chúng có thể rò rỉ các chất độc hại vào mạch nước ngầm.</div>
+            </div>
+
+            <div class="paragraph-block" id="p2-para-3">
+                <p class="paragraph-text">Moreover, in the agricultural sector, the traditional reliance on chemical pesticides and fertilizers must be curtailed to prevent the further degradation of soil and water resources. By embracing _______________ (4) farming methods and supporting the use of biodegradable materials, we can begin to restore our degraded landscapes. If we can successfully manage these complexities, we will not only protect the ozone layer from further _______________ (5) but also secure a viable and prosperous future for all species on Earth.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p2-tr-3')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p2-tr-3">Hơn nữa, trong ngành nông nghiệp, sự phụ thuộc truyền thống vào thuốc trừ sâu hóa học và phân bón phải được cắt giảm để ngăn chặn sự suy thoái thêm của tài nguyên đất và nước. By áp dụng các phương pháp canh tác thay thế và ủng hộ việc sử dụng các vật liệu có thể phân hủy sinh học, chúng ta có thể bắt đầu phục hồi các cảnh quan bị suy thoái của mình. Nếu quản lý thành công những sự phức tạp này, chúng ta không chỉ bảo vệ tầng ô-zôn khỏi bị suy giảm thêm mà còn đảm bảo một tương lai khả thi và thịnh vượng cho tất cả các loài trên Trái Đất.</div>
+            </div>
+
+            <div class="glossary-wrapper">
+                <div class="glossary-title">📊 GLOSSARY (BẢNG TRÍCH XUẤT TỪ VỰNG HỌC THUẬT - CLOZE 2)</div>
+                <table class="glossary-table">
+                    <thead>
+                        <tr>
+                            <th>Từ vựng</th>
+                            <th>Từ loại</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Cặp từ đồng nghĩa tương đương</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Fossil fuels</td><td>n</td><td>Nhiên liệu hóa thạch</td><td>Carbon-intensive power sources</td></tr>
+                        <tr><td>Disposal</td><td>n</td><td>Sự vứt bỏ, quản lý rác thải</td><td>Waste management / discarding method</td></tr>
+                        <tr><td>Recycled</td><td>v</td><td>Được tái chế xử lý lại</td><td>Repurposed / processing anew</td></tr>
+                        <tr><td>Alternative</td><td>adj</td><td>Thay thế, giải pháp đổi mới</td><td>Eco-friendly / green farming method</td></tr>
+                        <tr><td>Depletion</td><td>n</td><td>Sự suy giảm, cạn kiệt bào mòn</td><td>Erosion / thinning of ozone layer</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 6:</strong> Choose the best option for blank (1):</div>
+                <button class="option-btn" onclick="checkMCQ(6, 'A', 'A')">A. fossil fuels</button>
+                <button class="option-btn" onclick="checkMCQ(6, 'B', 'A')">B. pesticides</button>
+                <button class="option-btn" onclick="checkMCQ(6, 'C', 'A')">C. biofuels</button>
+                <button class="option-btn" onclick="checkMCQ(6, 'D', 'A')">D. solar panels</button>
+                <div class="explain-box" id="ex-box-6"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 7:</strong> Choose the best option for blank (2):</div>
+                <button class="option-btn" onclick="checkMCQ(7, 'A', 'D')">A. accumulation</button>
+                <button class="option-btn" onclick="checkMCQ(7, 'B', 'D')">B. emission</button>
+                <button class="option-btn" onclick="checkMCQ(7, 'C', 'D')">C. depletion</button>
+                <button class="option-btn" onclick="checkMCQ(7, 'D', 'D')">D. disposal</button>
+                <div class="explain-box" id="ex-box-7"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 8:</strong> Choose the best option for blank (3):</div>
+                <button class="option-btn" onclick="checkMCQ(8, 'A', 'C')">A. repurposed</button>
+                <button class="option-btn" onclick="checkMCQ(8, 'B', 'C')">B. discarded</button>
+                <button class="option-btn" onclick="checkMCQ(8, 'C', 'C')">C. recycled</button>
+                <button class="option-btn" onclick="checkMCQ(8, 'D', 'C')">D. incinerated</button>
+                <div class="explain-box" id="ex-box-8"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 9:</strong> Choose the best option for blank (4):</div>
+                <button class="option-btn" onclick="checkMCQ(9, 'A', 'B')">A. barren</button>
+                <button class="option-btn" onclick="checkMCQ(9, 'B', 'B')">B. alternative</button>
+                <button class="option-btn" onclick="checkMCQ(9, 'C', 'B')">C. toxic</button>
+                <button class="option-btn" onclick="checkMCQ(9, 'D', 'B')">D. extinct</button>
+                <div class="explain-box" id="ex-box-9"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 10:</strong> Choose the best option for blank (5):</div>
+                <button class="option-btn" onclick="checkMCQ(10, 'A', 'C')">A. preservation</button>
+                <button class="option-btn" onclick="checkMCQ(10, 'B', 'C')">B. purification</button>
+                <button class="option-btn" onclick="checkMCQ(10, 'C', 'C')">C. depletion</button>
+                <button class="option-btn" onclick="checkMCQ(10, 'D', 'C')">D. sustainability</button>
+                <div class="explain-box" id="ex-box-10"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace" id="tab-pane-3">
+        <div class="panel-left" id="p3-left-scroll">
+            <div class="passage-title">Anthropogenic Footprints on the Biosphere</div>
+
+            <div class="paragraph-block" id="p3-para-1">
+                <p class="paragraph-text">The dawn of the 21st century has brought about an era where the scale of human influence on the planet’s atmosphere and ecosystem is unprecedented. While industrialization has propelled modern civilization, it has simultaneously unleashed a series of natural disasters that threaten the very foundation of our existence. The combustion of fossil fuels remains the primary driver of global warming, a process that has significantly intensified the greenhouse effect. As temperatures rise, the planet’s cryosphere melts, leading to rising sea levels that endanger coastal habitats.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p3-tr-1')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p3-tr-1">Bình minh của thế kỷ 21 đã mang lại một kỷ nguyên mà quy mô ảnh hưởng của con người đối với bầu khí quyển và hệ sinh thái của hành tinh là chưa từng có trong lịch sử (unprecedented). Trong khi công nghiệp hóa đã thúc đẩy nền văn minh hiện đại, nó đồng thời giải phóng một chuỗi thảm họa thiên nhiên đe dọa chính nền tảng tồn tại của chúng ta. Việc đốt nhiên liệu hóa thạch vẫn là động lực chính gây ra hiện tượng nóng lên toàn cầu, một quá trình đã làm tăng cường đáng kể hiệu ứng nhà kính. Khi nhiệt độ tăng lên, sinh quyển băng của hành tinh tan chảy, dẫn đến mực nước biển dâng cao gây nguy hiểm cho các môi trường sống ven biển.</div>
+            </div>
+
+            <div class="paragraph-block" id="p3-para-2">
+                <p class="paragraph-text">However, the crisis extends far beyond rising temperatures. In many regions, the relentless drive for agricultural expansion has led to systemic deforestation, stripping the earth of its lush tropical canopies. When these forests are cleared, the soil, once protected by a dense root system, becomes highly susceptible to being eroded by heavy rainfall. This leads to land depletion, turning once-fertile regions into barren expanses where nothing can grow. Furthermore, the loss of these forests means the destruction of essential habitats for countless species, many of which are now classified as endangered or have already become extinct.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p3-tr-2')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p3-tr-2">Tuy nhiên, cuộc khủng hoảng mở rộng ra xa hơn nhiều so với nhiệt độ tăng. Ở nhiều vùng, nỗ lực không ngừng mở rộng nông nghiệp đã dẫn đến nạn phá rừng mang tính hệ thống, tước đi các tán lá nhiệt đới tươi tốt của trái đất. Khi các khu rừng này bị phát quang, đất đai, vốn từng được bảo vệ bởi hệ thống rễ dày đặc, trở nên rất dễ bị xói mòn bởi mưa lớn. Điều này dẫn đến sự suy kiệt đất đai, biến những vùng đất từng màu mỡ thành những dải đất cằn cỗi không gì có thể phát triển. Hơn nữa, việc mất đi những khu rừng này đồng nghĩa với việc phá hủy môi trường sống thiết yếu của vô số loài, nhiều loài trong số đó hiện được phân loại là nguy cấp hoặc đã tuyệt chủng.</div>
+            </div>
+
+            <div class="paragraph-block" id="p3-para-3">
+                <p class="paragraph-text">Pollution also presents a multifaceted threat. The excessive use of chemical fertilizers and pesticides in industrial farming has led to the widespread contamination of groundwater. These toxic substances eventually find their way into the oceans, disrupting marine life and creating “dead zones” where biodiversity is virtually non-existent. In urban areas, industrial emissions react with water vapor to produce acid rain, which further damages terrestrial vegetation and stone structures. <span style="text-decoration: underline;">To mitigate these impacts, a transition to sustainability is imperative.</span> This involves not only reducing our carbon footprint but also investing in renewable energy sources like solar panels. The preservation of our natural resources requires a holistic approach, including the effort to recycle waste and purify our water systems. Only by maintaining the ozone layer and protecting the biosphere can we avoid further ecological collapse.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p3-tr-3')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p3-tr-3">Ô nhiễm cũng đưa ra một mối đe dọa đa diện. Việc sử dụng quá mức phân bón hóa học và thuốc trừ sâu trong canh tác công nghiệp đã dẫn đến ô nhiễm trên diện rộng nguồn nước ngầm. Những chất độc hại này cuối cùng tìm đường vào đại dương, phá vỡ sự sống dưới biển và tạo ra các 'vùng chết' nơi đa dạng sinh học hầu như không tồn tại. Ở các khu vực đô thị, khí thải công nghiệp phản ứng với hơi nước để tạo ra mưa axit, thứ gây hại thêm cho thảm thực vật trên cạn và cấu trúc đá. Để giảm thiểu những tác động này, một sự chuyển dịch sang tính bền vững là bắt buộc. Điều này không chỉ bao gồm việc giảm dấu chân carbon mà còn đầu tư vào các nguồn năng lượng tái tạo như các tấm pin mặt trời. Việc bảo tồn tài nguyên thiên nhiên của chúng ta đòi hỏi một cách tiếp cận toàn diện, bao gồm nỗ lực tái chế chất thải và thanh lọc các hệ thống nước. Chỉ bằng cách duy trì tầng ô-zôn và bảo vệ sinh quyển mới có thể tránh được sự sụp đổ sinh thái sâu sắc hơn.</div>
+            </div>
+
+            <div class="glossary-wrapper">
+                <div class="glossary-title">📊 GLOSSARY (BẢNG TRÍCH XUẤT TỪ VỰNG HỌC THUẬT - READING 1)</div>
+                <table class="glossary-table">
+                    <thead>
+                        <tr>
+                            <th>Từ vựng</th>
+                            <th>Từ loại</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Từ đồng nghĩa tương đương</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Unprecedented</td><td>adj</td><td>Chưa từng có tiền lệ, chưa từng thấy trước đây</td><td>Never seen or known before</td></tr>
+                        <tr><td>Eroded</td><td>v</td><td>Bị xói mòn, bào mòn đất đai</td><td>Worn away / washed away by rain</td></tr>
+                        <tr><td>Contamination</td><td>n</td><td>Sự ô nhiễm, nhiễm độc hóa chất</td><td>Pollution / toxic accumulation</td></tr>
+                        <tr><td>Imperative</td><td>adj</td><td>Cấp bách, bắt buộc tối thượng</td><td>Absolutely necessary / mandatory</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 11:</strong> The word “unprecedented” in Paragraph 1 is closest in meaning to _______________</div>
+                <button class="option-btn" onclick="checkMCQ(11, 'A', 'B')">A. common and expected</button>
+                <button class="option-btn" onclick="checkMCQ(11, 'B', 'B')">B. never seen or known before</button>
+                <button class="option-btn" onclick="checkMCQ(11, 'C', 'B')">C. extremely beneficial</button>
+                <button class="option-btn" onclick="checkMCQ(11, 'D', 'B')">D. historically insignificant</button>
+                <div class="explain-box" id="ex-box-11"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 12:</strong> According to Paragraph 2, what is a direct consequence of clearing tropical canopies?</div>
+                <button class="option-btn" onclick="checkMCQ(12, 'A', 'C')">A. The soil becomes more resilient to heavy rainfall.</button>
+                <button class="option-btn" onclick="checkMCQ(12, 'B', 'C')">B. The carbon footprint of the region is immediately eliminated.</button>
+                <button class="option-btn" onclick="checkMCQ(12, 'C', 'C')">C. Fertile regions are transformed into barren expanses.</button>
+                <button class="option-btn" onclick="checkMCQ(12, 'D', 'C')">D. Endangered species find new habitats in urban areas.</button>
+                <div class="explain-box" id="ex-box-12"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 13:</strong> The word “These” in Paragraph 3 refers to _______________</div>
+                <button class="option-btn" onclick="checkMCQ(13, 'A', 'C')">A. oceans and dead zones</button>
+                <button class="option-btn" onclick="checkMCQ(13, 'B', 'C')">B. industrial emissions</button>
+                <button class="option-btn" onclick="checkMCQ(13, 'C', 'C')">C. chemical fertilizers and pesticides</button>
+                <button class="option-btn" onclick="checkMCQ(13, 'D', 'C')">D. terrestrial vegetation</button>
+                <div class="explain-box" id="ex-box-13"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 14:</strong> Which of the following best paraphrases the underlined sentence in Paragraph 3?</div>
+                <button class="option-btn" onclick="checkMCQ(14, 'A', 'C')">A. Moving toward sustainable practices is optional if we want to reduce environmental damage.</button>
+                <button class="option-btn" onclick="checkMCQ(14, 'B', 'C')">B. Environmental impacts can only be stopped by ignoring industrial sustainability.</button>
+                <button class="option-btn" onclick="checkMCQ(14, 'C', 'C')">C. It is absolutely necessary to adopt sustainable methods to lessen these negative effects.</button>
+                <button class="option-btn" onclick="checkMCQ(14, 'D', 'C')">D. Sustainability is a natural result of the impacts mentioned in the previous paragraph.</button>
+                <div class="explain-box" id="ex-box-14"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 15:</strong> Which of the following statements would the author most likely support?</div>
+                <button class="option-btn" onclick="checkMCQ(15, 'A', 'C')">A. Modern industrialization is more important than preserving the cryosphere.</button>
+                <button class="option-btn" onclick="checkMCQ(15, 'B', 'C')">B. Agricultural expansion should be encouraged regardless of deforestation.</button>
+                <button class="option-btn" onclick="checkMCQ(15, 'C', 'C')">C. Protecting the biosphere requires a combined effort of technology and conservation.</button>
+                <button class="option-btn" onclick="checkMCQ(15, 'D', 'C')">D. Acid rain is a minor issue that does not require immediate attention.</button>
+                <div class="explain-box" id="ex-box-15"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace" id="tab-pane-4">
+        <div class="panel-left" id="p4-left-scroll">
+            <div class="passage-title">Biodiversity Loss and the "Sixth Extinction" Crisis</div>
+
+            <div class="paragraph-block" id="p4-para-1">
+                <p class="paragraph-text">The biological variety of our planet, known as biodiversity, is the silent engine that sustains human life. From providing natural resources for medicine to ensuring the pollination of crops, every species plays a critical role in the global ecosystem. Yet, we are currently navigating what scientists call the “Sixth Extinction,” a period characterized by a rate of species loss that far exceeds the natural background rate. The primary culprit is human activity, ranging from the over-exploitation of wildlife to the massive destruction of habitats.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p4-tr-1')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p4-tr-1">Sự đa dạng sinh học của hành tinh chúng ta là động cơ thầm lặng duy trì sự sống của con người. Từ việc cung cấp tài nguyên thiên nhiên cho y học đến đảm bảo sự thụ phấn của cây trồng, mỗi loài đóng một vai trò quan trọng trong hệ sinh thái toàn cầu. Tuy nhiên, chúng ta hiện đang điều hướng cái mà các nhà khoa học gọi là 'Cuộc tuyệt chủng thứ sáu', một giai đoạn đặc trưng bởi tỷ lệ mất loài vượt xa tỷ lệ tự nhiên trong lịch sử. Thủ phạm (culprit) chính là hoạt động của con người, từ khai thác quá mức động vật hoang dã đến phá hủy môi trường sống trên diện rộng.</div>
+            </div>
+
+            <div class="paragraph-block" id="p4-para-2">
+                <p class="paragraph-text">One of the most heart-wrenching aspects of this crisis is the impact on marine environments. Overfishing, combined with the contamination of the oceans by non-biodegradable plastics, has pushed many aquatic species to the brink. Furthermore, the depletion of the ozone layer and the resulting change in water temperatures have caused widespread coral bleaching. In terrestrial environments, the situation is equally dire. Poaching continues to decimate populations of large mammals in wildlife sanctuaries, driven by a lucrative illegal trade. <span style="text-decoration: underline;">When a keystone species becomes extinct, it triggers a “domino effect” that can destabilize the entire region.</span></p>
+                <button class="translate-btn" onclick="toggleTranslation('p4-tr-2')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p4-tr-2">Một trong những khía cạnh đau lòng nhất của cuộc khủng hoảng này là tác động đến môi trường biển. Đánh bắt cá quá mức, kết hợp với ô nhiễm đại dương do nhựa không phân hủy sinh học, đã đẩy nhiều loài thủy sản đến bờ vực tuyệt chủng. Hơn nữa, sự suy giật của tầng ô-zôn và sự thay đổi nhiệt độ nước sau đó đã gây ra hiện tượng tẩy trắng san hô trên diện rộng. Trong môi trường trên cạn, tình hình cũng thảm khốc không kém. Nạn săn trộm tiếp tục tàn phá các quần thể động vật có vú lớn trong các khu bảo tồn động vật hoang dã, được thúc đẩy bởi hoạt động buôn bán bất hợp pháp béo bở. Khi một loài chủ chốt bị tuyệt chủng, nó sẽ kích hoạt hiệu ứng quân bài domino có thể làm mất ổn định toàn bộ khu vực.</div>
+            </div>
+
+            <div class="paragraph-block" id="p4-para-3">
+                <p class="paragraph-text">Efforts to preserve these species often involve the creation of protected sanctuaries. However, <strong>these</strong> are often hampered by the ongoing effects of climate change. For instance, prolonged drought can turn a once-thriving lush forest into a wildfire-prone area, destroying the very environment the laws were meant to protect. To ensure sustainability, we must adopt eco-friendly practices that minimize our impact on the world. This includes the efficient disposal of waste and the promotion of renewable energy to reduce global warming. Beyond protection, restoration is also key. Scientists are working to purify river systems and reforest barren lands to restore the ecological balance. By reducing our carbon footprint and switching to alternative energy, we can slow down the depletion of the world’s most vital resources. The preservation of nature is not just a moral duty; it is a necessity for the survival of the human race.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p4-tr-3')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p4-tr-3">Các nỗ lực bảo tồn các loài này thường liên quan đến việc tạo ra các khu bảo tồn được bảo vệ. Tuy nhiên, chúng (these) thường bị cản trở bởi các tác động liên tục của biến đổi khí hậu. Ví dụ, hạn hán kéo dài có thể biến một khu rừng tươi tốt từng phát triển thịnh vượng thành khu vực dễ xảy ra cháy rừng, phá hủy chính môi trường mà luật pháp muốn bảo vệ. Để đảm bảo tính bền vững, chúng ta phải áp dụng các thông lệ thân thiện với môi trường nhằm giảm thiểu tác động đến thế giới. Điều này bao gồm xử lý chất thải hiệu quả và thúc đẩy năng lượng tái tạo để giảm nóng lên toàn cầu. Bên cạnh bảo vệ, phục hồi cũng là chìa khóa. Các nhà khoa học đang nỗ lực làm sạch các hệ thống sông và trồng lại rừng trên các vùng đất cằn cỗi để khôi phục sự cân bằng sinh thái. Bằng cách giảm dấu chân carbon và chuyển sang năng lượng thay thế, chúng ta có thể làm chậm sự cạn kiệt tài nguyên sống còn của thế giới. Bảo tồn thiên nhiên không chỉ là nghĩa vụ đạo đức; nó là một sự cần thiết cho sự sống còn của loài người.</div>
+            </div>
+
+            <div class="glossary-wrapper">
+                <div class="glossary-title">📊 GLOSSARY (BẢNG TRÍCH XUẤT TỪ VỰNG HỌC THUẬT - READING 2)</div>
+                <table class="glossary-table">
+                    <thead>
+                        <tr>
+                            <th>Từ vựng</th>
+                            <th>Từ loại</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Từ đồng nghĩa tương đương</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Culprit</td><td>adj/n</td><td>Thủ phạm, tác nhân chịu trách nhiệm tiêu cực</td><td>Factor responsible for a negative result</td></tr>
+                        <tr><td>Destabilize</td><td>v</td><td>Làm mất ổn định, phá vỡ thế cân bằng</td><td>Upset the ecological balance</td></tr>
+                        <tr><td>Sanctuaries</td><td>n</td><td>Khu bảo tồn thiên nhiên, nơi ẩn náu an toàn</td><td>Protected regions / safe havens</td></tr>
+                        <tr><td>Decimate</td><td>v</td><td>Tàn phá nặng nề, sụt giảm dân số loài</td><td>Destroy a large portion of population</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 16:</strong> The word “culprit” (in context) most likely means_______________</div>
+                <button class="option-btn" onclick="checkMCQ(16, 'A', 'B')">A. a positive solution to extinction</button>
+                <button class="option-btn" onclick="checkMCQ(16, 'B', 'B')">B. a factor responsible for a negative result</button>
+                <button class="option-btn" onclick="checkMCQ(16, 'C', 'B')">C. a species that helps purify the air</button>
+                <button class="option-btn" onclick="checkMCQ(16, 'D', 'B')">D. a natural resource used in modern medicine</button>
+                <div class="explain-box" id="ex-box-16"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 17:</strong> Which of the following best paraphrases the underlined sentence in Paragraph 2?</div>
+                <button class="option-btn" onclick="checkMCQ(17, 'A', 'C')">A. The extinction of a minor species has no significant impact on the rest of the ecosystem.</button>
+                <button class="option-btn" onclick="checkMCQ(17, 'B', 'C')">B. A region becomes more stable and balanced when its most important species disappears.</button>
+                <button class="option-btn" onclick="checkMCQ(17, 'C', 'C')">C. The loss of a crucial species sets off a chain of events that can upset the local ecological balance.</button>
+                <button class="option-btn" onclick="checkMCQ(17, 'D', 'C')">D. Keystone species are the only ones that do not affect the environment when they die out.</button>
+                <div class="explain-box" id="ex-box-17"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 18:</strong> According to Paragraph 3, why is it difficult to protect lush forests?</div>
+                <button class="option-btn" onclick="checkMCQ(18, 'A', 'B')">A. Because they are becoming too large to manage.</button>
+                <button class="option-btn" onclick="checkMCQ(18, 'B', 'B')">B. Because of extreme weather conditions like drought and wildfires.</button>
+                <button class="option-btn" onclick="checkMCQ(18, 'C', 'B')">C. Because there are no laws regarding environmental sustainability.</button>
+                <button class="option-btn" onclick="checkMCQ(18, 'D', 'B')">D. Because renewable energy is being used too frequently.</button>
+                <div class="explain-box" id="ex-box-18"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 19:</strong> The word “these” in Paragraph 3 refers to _______________</div>
+                <button class="option-btn" onclick="checkMCQ(19, 'A', 'C')">A. endangered species</button>
+                <button class="option-btn" onclick="checkMCQ(19, 'B', 'C')">B. terrestrial environments</button>
+                <button class="option-btn" onclick="checkMCQ(19, 'C', 'C')">C. protected sanctuaries</button>
+                <button class="option-btn" onclick="checkMCQ(19, 'D', 'C')">D. non-biodegradable plastics</button>
+                <div class="explain-box" id="ex-box-19"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 20:</strong> Which of the following statements would the author most likely support?</div>
+                <button class="option-btn" onclick="checkMCQ(20, 'A', 'C')">A. Economic profits from the illegal wildlife trade outweigh the loss of mammal populations.</button>
+                <button class="option-btn" onclick="checkMCQ(20, 'B', 'C')">B. Climate change is a natural phenomenon that humans should not try to interfere with.</button>
+                <button class="option-btn" onclick="checkMCQ(20, 'C', 'C')">C. Long-term human survival is inseparable from the active restoration and protection of nature.</button>
+                <button class="option-btn" onclick="checkMCQ(20, 'D', 'C')">D. Human beings can survive and thrive even if the global ecological balance is destroyed.</button>
+                <div class="explain-box" id="ex-box-20"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace" id="tab-pane-5">
+        <div class="panel-left" id="p5-left-scroll">
+            <div class="passage-title">Energy Frameworks and Environmental Challenges</div>
+
+            <div class="paragraph-block" id="p5-para-1">
+                <p class="paragraph-text">The global community is currently at a crossroads regarding its energy future. For over a century, the world has relied on fossil fuels to power industrial growth, but the environmental cost has been staggering. <span style="text-decoration: underline;">The resulting emissions have accumulated in the atmosphere, leading to a significant increase in global warming.</span> This shift in climate has not only led to the melting of polar ice caps but has also increased the frequency of extreme natural disasters, such as tsunamis, earthquakes, and catastrophic floods.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p5-tr-1')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p5-tr-1">Cộng đồng toàn cầu hiện đang đứng trước một ngã rẽ liên quan đến tương lai năng lượng của mình. Trong hơn một thế kỷ, thế giới đã dựa vào nhiên liệu hóa thạch để thúc đẩy tăng trưởng công nghiệp, nhưng cái giá phải trả cho môi trường là đáng kinh ngạc (staggering). Lượng khí thải phát sinh đã tích tụ trong bầu khí quyển, dẫn đến sự gia tăng đáng kể hiện tượng nóng lên toàn cầu. Sự thay đổi khí hậu này không chỉ dẫn đến sự tan chảy của các chỏm băng ở cực mà còn làm tăng tần suất xảy ra các thảm họa thiên nhiên cực đoan, chẳng hạn như sóng thần, động chất và lũ lụt thảm khốc.</div>
+            </div>
+
+            <div class="paragraph-block" id="p5-para-2">
+                <p class="paragraph-text">To address this, there is a growing movement toward sustainability through the adoption of renewable energy. Technologies such as solar panels and wind turbines offer a clean alternative to traditional power sources. By reducing our carbon footprint, we can slow the depletion of the ozone layer and mitigate the greenhouse effect. However, the transition is not without challenges. The production of high-tech batteries for renewable energy can sometimes lead to the exploitation of natural resources in ways that harm local ecosystems.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p5-tr-2')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p5-tr-2">Để giải quyết vấn đề này, ngày càng có nhiều phong trào hướng tới tính bền vững thông qua việc áp dụng năng lượng tái tạo. Các công nghệ như tấm pin mặt trời và tuabin gió cung cấp một giải pháp thay thế sạch cho các nguồn năng lượng truyền thống. Bằng cách giảm dấu chân carbon, chúng ta có thể làm chậm sự suy giảm của tầng ô-zôn và giảm thiểu hiệu ứng nhà kính. Tuy nhiên, quá trình chuyển đổi không phải là không có thách thức. Việc sản xuất pin công nghệ cao cho năng lượng tái tạo đôi khi có thể dẫn đến việc khai thác quá mức các tài nguyên thiên nhiên theo những cách gây hại cho hệ sinh thái địa phương.</div>
+            </div>
+
+            <div class="paragraph-block" id="p5-para-3">
+                <p class="paragraph-text">Furthermore, the impact of our current energy model extends to the soil and water. Acid rain, a byproduct of industrial pollution, can erode the health of lush forests and contaminate freshwater sources. In agriculture, the reliance on chemical fertilizers and pesticides has further led to the contamination of the land. To truly purify our planet, we must embrace a holistic approach that includes better waste disposal and the use of biodegradable materials. Conservation efforts must also focus on protecting endangered species whose habitats are threatened by energy infrastructure.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p5-tr-3')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p5-tr-3">Hơn nữa, tác động của mô hình năng lượng hiện tại của chúng ta mở rộng sang đất và nước. Mưa axit, một sản phẩm phụ (byproduct) của ô nhiễm công nghiệp, có thể làm xói mòn sức khỏe của những khu rừng tươi tốt và gây ô nhiễm nguồn nước ngọt. Trong nông nghiệp, việc phụ thuộc vào phân bón hóa học và thuốc trừ sâu đã dẫn đến ô nhiễm đất đai sâu sắc thêm. Để thực sự thanh lọc hành tinh của chúng ta, chúng ta phải áp dụng một cách tiếp cận toàn diện bao gồm xử lý chất thải tốt hơn và sử dụng các vật liệu có thể phân hủy sinh học. Các nỗ lực bảo tồn cũng phải tập trung vào việc bảo vệ các loài nguy cấp có môi trường sống bị đe dọa bởi cơ sở hạ tầng năng lượng.</div>
+            </div>
+
+            <div class="paragraph-block" id="p5-para-4">
+                <p class="paragraph-text">Ultimately, the goal is to create a world where human progress does not come at the expense of the environment. This requires a commitment to preserve our biodiversity and ensure that our actions are eco-friendly. Whether it is preventing poaching in a forest sanctuary or reducing the toxic runoff from a factory, every action counts. The atmosphere we share is a finite resource, and its protection is the defining challenge of our time.</p>
+                <button class="translate-btn" onclick="toggleTranslation('p5-tr-4')">Mở dịch đoạn này 🌟</button>
+                <div class="translation-box" id="p5-tr-4">Cuối cùng, mục tiêu là tạo ra một thế giới nơi sự tiến bộ của con người không phải trả giá bằng môi trường. Điều này đòi hỏi một cam kết bảo tồn đa dạng sinh học của chúng ta và đảm bảo rằng các hành động của chúng ta thân thiện với môi trường. Cho dù đó là ngăn chặn nạn săn trộm trong khu bảo tồn rừng hay giảm lượng dòng chảy độc hại từ một nhà máy, mọi hành động đều có giá trị. Bầu khí quyển chúng ta chia sẻ là một tài nguyên hữu hạn, và việc bảo vệ nó là thách thức mang tính định hình kỷ nguyên của chúng ta.</div>
+            </div>
+
+            <div class="glossary-wrapper">
+                <div class="glossary-title">📊 GLOSSARY (BẢNG TRÍCH XUẤT TỪ VỰNG HỌC THUẬT - READING 3)</div>
+                <table class="glossary-table">
+                    <thead>
+                        <tr>
+                            <th>Từ vựng</th>
+                            <th>Từ loại</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Từ đồng nghĩa tương đương</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Staggering</td><td>adj</td><td>Đáng kinh ngạc, gây sửng sốt sửng sốt</td><td>Shockingly large or impressive</td></tr>
+                        <tr><td>Accumulated</td><td>v</td><td>Tích tụ, thu thập tăng dần</td><td>Gathered / piled up over time</td></tr>
+                        <tr><td>Byproduct</td><td>n</td><td>Sản phẩm phụ phát sinh gián tiếp</td><td>Incidental or secondary result</td></tr>
+                        <tr><td>Finite</td><td>adj</td><td>Có hạn, giới hạn giới biên</td><td>Limited / restricted bound</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 21:</strong> Which of the following is the best synonym for “staggering” as used in Paragraph 1?</div>
+                <button class="option-btn" onclick="checkMCQ(21, 'A', 'B')">A. negligible and small</button>
+                <button class="option-btn" onclick="checkMCQ(21, 'B', 'B')">B. shockingly large or impressive</button>
+                <button class="option-btn" onclick="checkMCQ(21, 'C', 'B')">C. stable and unchanging</button>
+                <button class="option-btn" onclick="checkMCQ(21, 'D', 'B')">D. historically predictable</button>
+                <div class="explain-box" id="ex-box-21"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 22:</strong> Which of the following best paraphrases the underlined sentence in Paragraph 1?</div>
+                <button class="option-btn" onclick="checkMCQ(22, 'A', 'B')">A. Global warming is the primary cause of the buildup of gases in the atmosphere.</button>
+                <button class="option-btn" onclick="checkMCQ(22, 'B', 'B')">B. The buildup of discharged gases in the air has caused the earth’s temperature to rise considerably.</button>
+                <button class="option-btn" onclick="checkMCQ(22, 'C', 'B')">C. Significant increases in global warming have prevented emissions from accumulating.</button>
+                <button class="option-btn" onclick="checkMCQ(22, 'D', 'B')">D. The atmosphere is responsible for discharging gases that cool down the planet.</button>
+                <div class="explain-box" id="ex-box-22"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 23:</strong> The word “byproduct” in Paragraph 3 most likely means _______________</div>
+                <button class="option-btn" onclick="checkMCQ(23, 'A', 'B')">A. the primary goal of an industrial process</button>
+                <button class="option-btn" onclick="checkMCQ(23, 'B', 'B')">B. an incidental or secondary result of an activity</button>
+                <button class="option-btn" onclick="checkMCQ(23, 'C', 'B')">C. a natural resource used to purify water</button>
+                <button class="option-btn" onclick="checkMCQ(23, 'D', 'B')">D. a type of biodegradable fertilizer</button>
+                <div class="explain-box" id="ex-box-23"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 24:</strong> Which of the following statements is NOT supported by the passage?</div>
+                <button class="option-btn" onclick="checkMCQ(24, 'A', 'D')">A. Acid rain can damage forests and contaminate water.</button>
+                <button class="option-btn" onclick="checkMCQ(24, 'B', 'D')">B. Fossil fuels have contributed significantly to global warming.</button>
+                <button class="option-btn" onclick="checkMCQ(24, 'C', 'D')">C. Poaching is a major threat to species in forest sanctuaries.</button>
+                <button class="option-btn" onclick="checkMCQ(24, 'D', 'D')">D. Tsunami and earthquakes are exclusively caused by solar panels.</button>
+                <div class="explain-box" id="ex-box-24"></div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="question-header"><strong>Question 25:</strong> Which of the following statements would the author most likely support?</div>
+                <button class="option-btn" onclick="checkMCQ(25, 'A', 'C')">A. Fossil fuels should remain the world’s primary energy source due to their historical success.</button>
+                <button class="option-btn" onclick="checkMCQ(25, 'B', 'C')">B. Technological progress is more important than the preservation of endangered species.</button>
+                <button class="option-btn" onclick="checkMCQ(25, 'C', 'C')">C. A successful energy transition must balance technical innovation with environmental safety.</button>
+                <button class="option-btn" onclick="checkMCQ(25, 'D', 'C')">D. Protecting the environment is a simple task that does not require global commitment.</button>
+                <div class="explain-box" id="ex-box-25"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-panel">
+        <button class="submit-all-btn" onclick="openReportModal()">NỘP BÀI XEM ĐIỂM SỐ</button>
+    </div>
+
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-content">
+            <div style="font-size: 38pt;">🏆</div>
+            <div style="font-weight: 900; font-size: 15pt; color: #2C3E50;">KẾT QUẢ KIỂM TRA TOÀN DIỆN</div>
+            <div class="modal-score-lbl" id="final-score-lbl">0 / 25</div>
+            <div class="modal-comment-lbl" id="final-comment-lbl">Lời nhận xét đang được thiết lập...</div>
+            <button class="modal-close-btn" onclick="closeModal()">ĐÓNG ĐỂ XEM LẠI DẪN CHỨNG</button>
+        </div>
+    </div>
+
+    <script>
+        // Cơ sở dữ liệu phản hồi 4 bước học thuật đỉnh cao phục vụ nút bấm đồng bộ dẫn chứng (Locate & Sync)
+        const detailedExplanations = {
+            1: { ans: "C. clearance", para: "p1-para-2", scroll: "p1-left-scroll", step2: "Môi trường rừng nguyên sinh đang bị dọn dẹp, phát quang quy mô lớn để xây dựng hạ tầng.", step3: "Từ 'clearance' mang nghĩa sự san phẳng phá hủy, dọn sạch một bề mặt diện tích sinh thái, tạo colocation đúng ngữ pháp.", step4: "Loại A (trồng lại rừng), loại B (nạn phá rừng) vì đứng sau cụm 'large-scale' cần một danh từ chỉ hành động dọn mặt bằng học thuật chuẩn xác hơn." },
+            2: { ans: "A. eroded", para: "p1-para-3", scroll: "p1-left-scroll", step2: "Đất cằn cỗi và kiệt quệ sau khi mất đi hệ thống thực vật bảo vệ sẽ rất dễ bị tác động vật lý của mưa bão.", step3: "Động từ bị động 'eroded' chỉ quá trình đất đai bị xói mòn và rửa trôi lớp dinh dưỡng thượng tầng.", step4: "Loại B (tái chế), C (ô nhiễm), D (thanh lọc)." },
+            3: { ans: "B. sustainability", para: "p1-para-4", scroll: "p1-left-scroll", step2: "Cần tìm danh từ đi kèm tính từ 'ecological' chỉ một xu thế hoặc giải pháp phát triển bền vững nhằm cứu vãn sinh quyển.", step3: "'Ecological sustainability' là thuật ngữ khoa học cố định chỉ tính bền vững sinh thái.", step4: "Loại A (khai thác), C (ô nhiễm), D (suy thoái) vì đi ngược lại logic gìn giữ tài nguyên." },
+            4: { ans: "C. remediate", para: "p1-para-4", scroll: "p1-left-scroll", step2: "Cần một động từ mang ý nghĩa hành động tích cực xử lý hoặc cải tạo các nguồn nước bẩn bị nhiễm độc.", step3: "Động từ 'remediate' mang nghĩa khắc phục, xử lý bài toán ô nhiễm môi trường theo đúng quy chuẩn khoa học.", step4: "Loại A (khai thác), B (làm ô nhiễm), D (làm cạn kiệt)." },
+            5: { ans: "D. preserve", para: "p1-para-4", scroll: "p1-left-scroll", step2: "Mục tiêu tối hậu là giữ gìn bảo tồn các kỳ quan thiên nhiên còn lại cho muôn đời sau.", step3: "Động từ 'preserve' lột tả trọn vẹn nét nghĩa bảo tồn giữ gìn nguyên trạng cấu trúc sinh thái.", step4: "Loại A (xói mòn), B (ô nhiễm), C (làm kiệt quệ)." },
+            6: { ans: "A. fossil fuels", para: "p2-para-1", scroll: "p2-left-scroll", step2: "Quá trình công nghiệp hóa thế giới hơn một thế kỷ qua vận hành dựa trên việc đốt cháy các năng lượng thạch học phát thải CO2.", step3: "'Fossil fuels' (nhiên liệu hóa thạch) gồm than đá, dầu mỏ tỏa ra khí độc hại làm dâng cao hiệu ứng nhà kính.", step4: "Các phương án khác (thuốc trừ sâu, pin mặt trời) hoàn toàn không khớp logic bối cảnh." },
+            7: { ans: "D. disposal", para: "p2-para-2", scroll: "p2-left-scroll", step2: "Để cuộc cách mạng xanh thực sự thân thiện, ta phải lập ra các tiêu chuẩn xử lý, loại bỏ rác thải nghiêm ngặt.", step3: "Cụm danh từ 'waste disposal' mang nghĩa việc xử lý vứt bỏ rác thải công nghiệp.", step4: "Loại A (tích tụ), B (phát thải), C (cạn kiệt)." },
+            8: { ans: "C. recycled", para: "p2-para-2", scroll: "p2-left-scroll", step2: "Đồ điện tử và cánh quạt tuabin cũ cần được đưa vào chu trình xử lý tái chế lại để tránh rò rỉ chất độc.", step3: "Động từ dạng bị động 'recycled' (được tái chế) khớp hoàn toàn định hướng của nền kinh tế tuần hoàn.", step4: "Loại B (bị vứt bỏ) vì bãi chôn lấp chính là landfill." },
+            9: { ans: "B. alternative", para: "p2-para-3", scroll: "p2-left-scroll", step2: "Cắt bỏ thuốc trừ sâu hóa học buộc người nông dân phải tìm kiếm các phương thức canh tác đổi mới, sạch hơn.", step3: "Tính từ 'alternative' trong 'alternative farming methods' chỉ các giải pháp nông nghiệp hữu cơ thay thế phương pháp truyền thống.", step4: "Loại A (cằn cỗi), C (độc hại), D (tuyệt chủng)." },
+            10: { ans: "C. depletion", para: "p2-para-3", scroll: "p2-left-scroll", step2: "Bảo vệ tầng ô-zôn khỏi hiện tượng bào mòn, mỏng đi hoặc suy giảm lỗ thủng khí quyển.", step3: "Cụm thuật ngữ khí tượng học 'ozone layer depletion' chỉ sự suy giảm, cạn kiệt tầng ô-zôn.", step4: "Do đó chọn C." },
+            11: { ans: "B. never seen or known before", para: "p3-para-1", scroll: "p3-left-scroll", step2: "Câu đầu mô tả quy mô ảnh hưởng của con người đối với bầu khí quyển là 'unprecedented' (chưa từng có tiền lệ).", step3: "Do đó, từ này đồng nghĩa hoàn hảo với 'never seen or known before' (chưa từng thấy hay được biết tới trước đây).", step4: "Loại A (bình thường), C (có lợi), D (vô nghĩa lịch sử)." },
+            12: { ans: "C. Fertile regions are transformed into barren expanses.", para: "p3-para-2", scroll: "p3-left-scroll", step2: "Đoạn 2 ghi nhận: 'This leads to land depletion, turning once-fertile regions into barren expanses where nothing can grow.'", step3: "Nghĩa là việc phá tán rừng khiến đất màu mỡ biến đổi thành những dải đất cằn cỗi hoang vu.", step4: "Chọn phương án C bảo toàn thông tin gốc." },
+            13: { ans: "C. chemical fertilizers and pesticides", para: "p3-para-3", scroll: "p3-left-scroll", step2: "Đoạn 3 viết: 'The excessive use of chemical fertilizers and pesticides... These toxic substances eventually find their way...'", step3: "Đại từ chỉ định số nhiều 'These' quy chiếu trực tiếp danh từ phức hợp 'chemical fertilizers and pesticides' ở ngay phía trước.", step4: "Do đó chọn C." },
+            14: { ans: "C. It is absolutely necessary to adopt sustainable methods to lessen these negative effects.", para: "p3-para-3", scroll: "p3-left-scroll", step2: "Câu gốc: 'To mitigate these impacts, a transition to sustainability is imperative.'", step3: "Mitigate đồng nghĩa với lessen, sustainability tương đương với sustainable methods, và imperative đồng nghĩa với absolutely necessary.", step4: "Phương án C diễn dịch chuẩn xác cấu trúc học thuật." },
+            15: { ans: "C. Protecting the biosphere requires a combined effort of technology and conservation.", para: "p3-para-3", scroll: "p3-left-scroll", step2: "Tác giả kết luận toàn bài bằng cách đề xuất giải pháp tổng thể: vừa dùng năng lượng công nghệ (solar panels) vừa nỗ lực bảo tồn sinh quyển.", step3: "Suy ra tác giả ủng hộ sự kết hợp biện pháp công nghệ và ý thức bảo tồn.", step4: "Loại A, B, D vì đi ngược quan điểm phát triển bền vững." },
+            16: { ans: "B. a factor responsible for a negative result", para: "p4-para-1", scroll: "p4-left-scroll", step2: "Bài đọc nêu ra tỷ lệ loài mất đi vượt xa tự nhiên và kết luận 'The primary culprit is human activity...'", step3: "Từ 'culprit' trong văn cảnh này chỉ tác nhân, thủ phạm chịu trách nhiệm gây ra một kết quả tiêu cực tồi tệ.", step4: "Chọn phương án B." },
+            17: { ans: "C. The loss of a crucial species sets off a chain of events that can upset the local ecological balance.", para: "p4-para-2", scroll: "p4-left-scroll", step2: "Câu gốc: 'When a keystone species becomes extinct, it triggers a “domino effect” that can destabilize the entire region.'", step3: "Keystone species đồng nghĩa với crucial species, domino effect đồng nghĩa với chain of events, destabilize đồng nghĩa với upset ecological balance.", step4: "Do đó chọn C." },
+            18: { ans: "B. Because of extreme weather conditions like drought and wildfires.", para: "p4-para-3", scroll: "p4-left-scroll", step2: "Đoạn 3 ghi nhận: 'For instance, prolonged drought can turn a once-thriving lush forest into a wildfire-prone area...'", step3: "Tức là thời tiết cực đoan như hạn hán và cháy rừng làm cản trở nỗ lực bảo vệ.", step4: "Chọn phương án B." },
+            19: { ans: "C. protected sanctuaries", para: "p4-para-3", scroll: "p4-left-scroll", step2: "Câu văn: 'Efforts to preserve these species often involve the creation of protected sanctuaries. However, these are often hampered...'", step3: "Đại từ 'these' dùng thay thế cho danh từ số nhiều 'protected sanctuaries' ở câu liền trước.", step4: "Do đó chọn C." },
+            20: { ans: "C. Long-term human survival is inseparable from the active restoration and protection of nature.", para: "p4-para-3", scroll: "p4-left-scroll", step2: "Tác giả chốt hạ câu cuối bài: 'The preservation of nature is not just a moral duty; it is a necessity for the survival of the human race.'", step3: "Tức sự sinh tồn của loài người gắn liền không thể tách rời việc bảo vệ thiên nhiên.", step4: "Chọn phương án C." },
+            21: { ans: "B. shockingly large or impressive", para: "p5-para-1", scroll: "p5-left-scroll", step2: "Văn cảnh nói về cái giá phải trả cho môi trường do dùng nhiên liệu thạch là 'staggering' (gây choáng váng, sửng sốt).", step3: "Do đó, từ này đồng nghĩa hoàn toàn với 'shockingly large or impressive'.", step4: "Chọn câu B." },
+            22: { ans: "B. The buildup of discharged gases in the air has caused the earth’s temperature to rise considerably.", para: "p5-para-1", scroll: "p5-left-scroll", step2: "Câu gốc: 'The resulting emissions have accumulated in the atmosphere, leading to a significant increase in global warming.'", step3: "Buildup tương đương với accumulated, discharged gases tương đương với emissions, và rise considerably tương đương với significant increase.", step4: "Do đó chọn B." },
+            23: { ans: "B. an incidental or secondary result of an activity", para: "p5-para-3", scroll: "p5-left-scroll", step2: "Mưa axit sinh ra như một 'byproduct' (sản phẩm phụ) không chủ định phát sinh gián tiếp từ khí thải ô nhiễm nhà máy.", step3: "Định nghĩa chuẩn của 'byproduct' trong từ điển học thuật là sản phẩm phụ xuất hiện gián tiếp.", step4: "Chọn phương án B." },
+            24: { ans: "D. Tsunami and earthquakes are exclusively caused by solar panels.", para: "p5-para-1", scroll: "p5-left-scroll", step2: "Đoạn 1 ghi nhận sóng thần, động đất phát sinh do sự biến đổi khí hậu toàn cầu chứ hoàn toàn không đổ lỗi cho pin mặt trời.", step3: "Lời tuyên bố pin mặt trời độc quyền gây động đất là sai lệch hoàn toàn thực tế bài văn.", step4: "Do đó chọn D làm đáp án cho câu hỏi tìm ý kiến NOT supported." },
+            25: { ans: "C. A successful energy transition must balance technical innovation with environmental safety.", para: "p5-para-2", scroll: "p5-left-scroll", step2: "Tác giả lập luận việc chuyển dịch sang năng lượng sạch có thách thức như việc sản xuất pin công nghệ cao gây hại hệ sinh thái cục bộ nếu không cẩn thận xử lý.", step3: "Do đó, một cuộc chuyển dịch năng lượng thành công bắt buộc phải cân bằng giữa đổi mới kỹ thuật và an toàn sinh thái môi trường.", step4: "Chọn đáp án C." }
+        };
+
+        let answersStatus = {};
+        let countdownTimer = null;
+        let secondsLeft = 1500;
+        let isTimerRunning = false;
+
+        function toggleTimer() {
+            const btn = document.getElementById('time-toggle-btn');
+            if (isTimerRunning) {
+                clearInterval(countdownTimer);
+                btn.innerText = "TIẾP TỤC LÀM BÀI";
+                isTimerRunning = false;
+            } else {
+                isTimerRunning = true;
+                btn.innerText = "TẠM DỪNG";
+                countdownTimer = setInterval(() => {
+                    secondsLeft--;
+                    let mins = Math.floor(secondsLeft / 60);
+                    let secs = secondsLeft % 60;
+                    document.getElementById('time-lbl').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    
+                    if (secondsLeft <= 0) {
+                        clearInterval(countdownTimer);
+                        isTimerRunning = false;
+                        btn.innerText = "HẾT GIỜ";
+                        alert("Đã hết giờ làm bài. Bạn vẫn có thể tiếp tục làm, nhưng nhớ là trong phòng thi thật, bạn chỉ nên làm một bài như thế này trong 20-25 phút thôi nha.");
+                    }
+                }, 1000);
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-link').forEach((link, idx) => {
+                link.classList.toggle('active', (idx + 1) === tabId);
+            });
+            document.querySelectorAll('.workspace').forEach((pane, idx) => {
+                pane.classList.toggle('active', (idx + 1) === tabId);
+            });
+        }
+
+        function toggleTranslation(boxId) {
+            const box = document.getElementById(boxId);
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+        function playGamifiedSound(type) {
+            try {
+                if(!audioCtx) audioCtx = new AudioCtx();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                if(type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    osc.frequency.setValueAtTime(783.99, now + 0.16);
+                    gain.gain.setValueAtTime(0.12, now);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(180, now);
+                    osc.frequency.linearRampToValueAtTime(90, now + 0.3);
+                    gain.gain.setValueAtTime(0.15, now);
+                }
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(now); osc.stop(now + 0.35);
+            } catch(e){}
+        }
+
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        function triggerConfettiBurst() {
+            particles = [];
+            for(let i=0; i<40; i++) {
+                particles.push({
+                    x: canvas.width / 2 + (Math.random() * 200 - 100),
+                    y: canvas.height / 2 + (Math.random() * 200 - 100),
+                    size: Math.random() * 6 + 4,
+                    color: ['#6C5CE7','#00CEC9','#FF7675','#FDCB6E','#00D26A'][Math.floor(Math.random() * 5)],
+                    vX: Math.random() * 8 - 4, vY: Math.random() * 8 - 4
+                });
+            }
+            animateConfetti();
+        }
+        function animateConfetti() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            let remainsActive = false;
+            particles.forEach(p => {
+                p.x += p.vX; p.y += p.vY; p.vY += 0.14;
+                if(p.y < canvas.height) remainsActive = true;
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, p.size, p.size);
+            });
+            if(remainsActive) requestAnimationFrame(animateConfetti);
+        }
+
+        function checkMCQ(qId, selectedKey, correctKey) {
+            if (answersStatus[qId] !== undefined) return;
+
+            const clickedBtn = event.target;
+            const parentCard = clickedBtn.closest('.exercise-card');
+            
+            if (selectedKey === correctKey) {
+                answersStatus[qId] = true;
+                clickedBtn.classList.add('correct-ui');
+                playGamifiedSound('correct');
+                triggerConfettiBurst();
+            } else {
+                answersStatus[qId] = false;
+                clickedBtn.classList.add('wrong-ui');
+                parentCard.classList.add('shake-effect');
+                playGamifiedSound('wrong');
+                setTimeout(() => parentCard.classList.remove('shake-effect'), 400);
+
+                const siblingButtons = parentCard.querySelectorAll('.option-btn');
+                siblingButtons.forEach(btn => {
+                    if (btn.innerText.startsWith(correctKey)) {
+                        btn.classList.add('correct-ui');
+                    }
+                });
+            }
+
+            revealExplanationBox(qId);
+            recalculateProgressBar();
+        }
+
+        function revealExplanationBox(qId) {
+            const expData = detailedExplanations[qId];
+            const targetCard = event.target.closest('.exercise-card').querySelector('.explain-box');
+            
+            if (!targetCard || !expData) return;
+
+            targetCard.innerHTML = `
+                <div class="explain-row"><strong>1. ĐÁP ÁN ĐÚNG:</strong> ${expData.ans}</div>
+                <div class="explain-row"><strong>2. PHÂN TÍCH 4 BƯỚC SƯ PHẠM CHI TIẾT:</strong></div>
+                <div class="explain-row" style="padding-left:10px;">• <em>Bước 1 - Dịch nghĩa câu hỏi:</em> Giải mã từ khóa chính xác.</div>
+                <div class="explain-row" style="padding-left:10px;">• <em>Bước 2 - Vị trí đoạn văn chứa dẫn chứng:</em> ${expData.step2}</div>
+                <div class="explain-row" style="padding-left:10px;">• <em>Bước 3 - Vì sao đáp án này ĐÚNG:</em> ${expData.step3}</div>
+                <div class="explain-row" style="padding-left:10px;">• <em>Bước 4 - Vì sao loại trừ các đáp án khác:</em> ${expData.step4}</div>
+                <button class="locate-sync-btn" onclick="syncLocateEvidence('${expData.para}', '${expData.scroll}')">🖱️ Định vị vị trí dẫn chứng trong bài đọc</button>
+            `;
+            targetCard.style.display = "block";
+        }
+
+        function syncLocateEvidence(paraId, scrollContainerId) {
+            const paraElement = document.getElementById(paraId);
+            const scrollContainer = document.getElementById(scrollContainerId);
+
+            if (!paraElement || !scrollContainer) return;
+
+            document.querySelectorAll('.paragraph-block').forEach(p => p.classList.remove('located-flash'));
+            scrollContainer.scrollTo({
+                top: paraElement.offsetTop - scrollContainer.offsetTop - 15,
+                behavior: 'smooth'
+            });
+            paraElement.classList.add('located-flash');
+        }
+
+        function recalculateProgressBar() {
+            const totalQuestions = 25;
+            let answeredCount = Object.keys(answersStatus).length;
+            let percent = Math.round((answeredCount / totalQuestions) * 100);
+
+            document.getElementById('progress-fill-node').style.width = `${percent}%`;
+            document.getElementById('progress-txt-node').innerText = `${percent}%`;
+        }
+
+        function openReportModal() {
+            const totalQuestions = 25;
+            let correctCount = 0;
+
+            for (let key in answersStatus) {
+                if (answersStatus[key] === true) correctCount++;
+            }
+
+            let comment = "";
+            let percentage = (correctCount / totalQuestions) * 100;
+
+            if (percentage >= 85) {
+                comment = "🔥 THIÊN TÀI ĐỌC HIỂU! Kỹ năng xử lý thuật ngữ Kỷ Nhân sinh và bám sát synonyms của con vô cùng xuất sắc, đạt chuẩn mức IELTS 8.5+. Quá đỉnh con ơi!";
+            } else if (percentage >= 60) {
+                comment = "🌟 LÀM TỐT LẮM CON! Con định vị thông tin bám sát văn bản rất tốt. Nhớ học thuộc các từ khóa sinh thái ở bảng Glossary để bứt phá điểm tuyệt đối nhé.";
+            } else {
+                comment = "💪 CỐ LÊN NHÉ CON! Đừng lo lắng, con hãy bấm nút chuột định vị ở dưới mỗi câu làm sai để rà soát lại cấu trúc câu cùng cô nhé.";
+            }
+
+            document.getElementById('final-score-lbl').innerText = `${correctCount} / ${totalQuestions}`;
+            document.getElementById('final-comment-lbl').innerText = comment;
+            document.getElementById('score-modal').style.display = "flex";
+            
+            if (percentage >= 60) triggerConfettiBurst();
+        }
+
+        document.getElementById('score-modal').addEventListener('click', function(e) {
+            if(e.target === this) closeModal();
+        });
+
+        function closeModal() { document.getElementById('score-modal').style.display = "none"; }
+    </script>
+</body>
+</html>
